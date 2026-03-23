@@ -1,0 +1,347 @@
+/* ── Frontend Buttons ───────────────────────────────────────────────────────── */
+
+@keyframes fcb-slide-in {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+.fcb-container {
+    position: fixed !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 99999 !important;
+    animation: fcb-slide-in 0.4s ease both;
+    pointer-events: none;
+    align-items: flex-end; /* right-aligned by default */
+}
+
+.fcb-container.bottom-left,
+.fcb-container.top-left {
+    align-items: flex-start; /* left-aligned for left positions */
+}
+
+.fcb-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    pointer-events: all;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    line-height: 1;
+}
+
+.fcb-btn:hover {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+}
+
+.fcb-btn.circle {
+    border-radius: 50%;
+    padding: 0;
+}
+
+.fcb-btn.pill    { border-radius: 999px; }
+.fcb-btn.rounded { border-radius: 12px; }
+
+.fcb-icon-svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+.fcb-dashicon {
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    line-height: 1 !important;
+    flex-shrink: 0;
+}
+
+.fcb-btn-label { line-height: 1; }
+
+/* ── Admin Base ─────────────────────────────────────────────────────────────── */
+
+.fcb-admin-wrap {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 24px;
+    margin-top: 20px;
+    align-items: start;
+}
+
+.fcb-card {
+    background: #fff;
+    border: 1px solid #e2e4e7;
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.fcb-card h2 {
+    margin: 0 0 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e1e1e;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.fcb-form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 16px;
+}
+
+.fcb-form-row > label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3c434a;
+}
+
+.fcb-form-row input[type="text"]:not(.fcb-cp-hex),
+.fcb-form-row input[type="number"],
+.fcb-form-row select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dcdcde;
+    border-radius: 5px;
+    font-size: 13px;
+    background: #fafafa;
+    color: #1e1e1e;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+.fcb-form-row input:not(.fcb-cp-hex):focus,
+.fcb-form-row select:focus {
+    outline: none;
+    border-color: #2271b1;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(34,113,177,0.15);
+}
+
+.fcb-inline-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.fcb-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    background: #f6f7f7;
+    border-radius: 6px;
+}
+
+.fcb-toggle-row input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: #2271b1;
+    cursor: pointer; margin: 0;
+}
+
+.fcb-toggle-row label { font-size: 13px; font-weight: 500; color: #1e1e1e; cursor: pointer; margin: 0; }
+
+/* ── Custom Color Picker ────────────────────────────────────────────────────── */
+
+.fcb-color-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.fcb-color-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fcb-color-field > label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3c434a;
+}
+
+.fcb-cp-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fafafa;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+    padding: 6px 10px;
+    transition: border-color 0.15s;
+}
+
+.fcb-cp-wrap:focus-within {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 2px rgba(34,113,177,0.15);
+    background: #fff;
+}
+
+.fcb-cp-swatch {
+    width: 34px;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.15);
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.fcb-color-native {
+    position: absolute;
+    inset: -4px;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+.fcb-cp-hex {
+    flex: 1;
+    border: none !important;
+    border-left: 1px solid #e0e0e0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding: 0 0 0 10px !important;
+    margin: 0 !important;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 13px;
+    color: #1e1e1e;
+    width: 90px;
+    min-width: 0;
+    letter-spacing: 0.03em;
+}
+
+/* ── Icon Picker ────────────────────────────────────────────────────────────── */
+
+.fcb-icon-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+}
+
+.fcb-icon-opt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.fcb-icon-opt:hover {
+    border-color: #2271b1;
+    transform: scale(1.08);
+}
+
+.fcb-icon-sel {
+    border-color: #2271b1 !important;
+    background: #e8f0fb !important;
+}
+
+.fcb-icon-opt .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #3c434a;
+}
+
+.fcb-icon-opt svg { display: block; color: #3c434a; }
+.fcb-icon-sel .dashicons,
+.fcb-icon-sel svg { color: #2271b1; }
+
+/* ── Save Button ────────────────────────────────────────────────────────────── */
+
+.fcb-save-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background: #2271b1;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.fcb-save-btn:hover { background: #135e96; }
+
+/* ── Preview Phone ──────────────────────────────────────────────────────────── */
+
+.fcb-preview-phone {
+    background: #1a1a2e;
+    border-radius: 36px;
+    padding: 14px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 0 0 2px #333;
+}
+
+.fcb-preview-screen {
+    background: #f0f4f8;
+    border-radius: 22px;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fcb-preview-screen::before {
+    content: 'Page Preview';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 11px;
+    color: #b0bec5;
+    font-family: sans-serif;
+    letter-spacing: 0.05em;
+}
+
+#fcb-preview-buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 10;
+}
+
+/* ── Notices ─────────────────────────────────────────────────────────────────── */
+
+.fcb-notice-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
