@@ -60,6 +60,15 @@ $icons = [
                             <?php endforeach; ?>
                         </select>
                     </div>
+
+                    <div class="fcb-form-row">
+                        <label for="fcb-orientation">Button Orientation</label>
+                        <select id="fcb-orientation" name="fcb[orientation]">
+                            <option value="vertical" <?php selected($s['orientation'] ?? 'vertical', 'vertical'); ?>>Vertical</option>
+                            <option value="horizontal" <?php selected($s['orientation'] ?? 'vertical', 'horizontal'); ?>>Horizontal</option>
+                        </select>
+                    </div>
+
                     <div class="fcb-inline-row">
                         <div class="fcb-form-row">
                             <label>Horizontal Offset (px)</label>

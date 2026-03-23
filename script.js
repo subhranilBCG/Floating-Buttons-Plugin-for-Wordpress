@@ -83,7 +83,8 @@
         if (!previewContainer) return;
         previewContainer.innerHTML = "";
 
-        var position = getVal("fcb[position]");
+        var position = getVal("fcb[position]") || "bottom-right";
+        var orient   = getVal("fcb[orientation]") || "vertical";
         var ox = parseInt(getVal("fcb[offset_x]"), 10) || 16;
         var oy = parseInt(getVal("fcb[offset_y]"), 10) || 16;
         var px = Math.round(ox * 0.45);
@@ -94,8 +95,20 @@
         previewContainer.style.left   = "";
         previewContainer.style.right  = "";
 
-        previewContainer.style[position.includes("bottom") ? "bottom" : "top"]  = py + "px";
-        previewContainer.style[position.includes("right")  ? "right"  : "left"] = px + "px";
+        var isBottom = position.includes("bottom");
+        var isRight  = position.includes("right");
+
+        previewContainer.style[isBottom ? "bottom" : "top"]  = py + "px";
+        previewContainer.style[isRight  ? "right"  : "left"] = px + "px";
+
+        // Layout direction mapping matching CSS
+        if (orient === "horizontal") {
+            previewContainer.style.flexDirection = isRight ? "row-reverse" : "row";
+            previewContainer.style.alignItems    = isBottom ? "flex-end" : "flex-start";
+        } else {
+            previewContainer.style.flexDirection = isBottom ? "column-reverse" : "column";
+            previewContainer.style.alignItems    = isRight ? "flex-end" : "flex-start";
+        }
 
         for (var i = 0; i < 3; i++) {
             if (!getChecked("fcb[buttons][" + i + "][enabled]")) continue;

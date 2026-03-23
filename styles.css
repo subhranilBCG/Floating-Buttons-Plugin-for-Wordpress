@@ -8,7 +8,7 @@
 .fcb-container {
     position: fixed !important;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse; /* vertical by default, reverse stacks bottom-up */
     gap: 10px;
     z-index: 99999 !important;
     animation: fcb-slide-in 0.4s ease both;
@@ -16,9 +16,21 @@
     align-items: flex-end; /* right-aligned by default */
 }
 
-.fcb-container.bottom-left,
+/* Base orientations */
+.fcb-container.top-right,
 .fcb-container.top-left {
-    align-items: flex-start; /* left-aligned for left positions */
+    flex-direction: column; /* top-down for top positions */
+}
+
+/* Horizontal Orientation Overrides */
+.fcb-container.orientation-horizontal {
+    flex-direction: row-reverse; /* default horizontal pushes right-to-left */
+}
+
+.fcb-container.orientation-horizontal.top-left,
+.fcb-container.orientation-horizontal.bottom-left,
+.fcb-container.orientation-horizontal.middle-left {
+    flex-direction: row; /* left-to-right for left positions */
 }
 
 .fcb-btn {
