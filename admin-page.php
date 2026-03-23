@@ -30,18 +30,23 @@ $icons = [
     'dashicons-store'        => [ 'label'=>'Store',    'html'=>'<span class="dashicons dashicons-store"></span>' ],
 ];
 ?>
-<div class="wrap">
-    <h1 style="display:flex;align-items:center;gap:10px;">
-        <span class="dashicons dashicons-phone" style="font-size:26px;color:#2271b1;width:26px;height:26px;"></span>
-        Floating Contact Buttons
-    </h1>
+<div class="wrap fcb-modern-wrap">
+    <div class="fcb-header-bar">
+        <h1 class="fcb-page-title">
+            <span class="dashicons dashicons-phone fcb-accent-icon"></span>
+            Floating Contact Buttons <span class="fcb-badge">PRO</span>
+        </h1>
+        <button type="submit" form="fcb-main-form" class="button button-primary fcb-btn-save">Save Changes</button>
+    </div>
+
     <?php if ( $saved ) : ?>
-        <div class="fcb-notice-success">✓ Settings saved successfully.</div>
+        <div class="fcb-notice-success"><span class="dashicons dashicons-yes"></span> Settings saved successfully.</div>
     <?php endif; ?>
 
     <div class="fcb-admin-wrap">
-        <div>
-            <form method="post" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>">
+        <!-- LEFT COLUMN: Settings -->
+        <div class="fcb-settings-col">
+            <form id="fcb-main-form" method="post" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>">
                 <?php wp_nonce_field( 'fcb_save_settings', 'fcb_nonce' ); ?>
                 <input type="hidden" name="action" value="fcb_save">
 
@@ -195,20 +200,19 @@ $icons = [
                 </div>
                 <?php endforeach; ?>
 
-                <button type="submit" class="fcb-save-btn">💾 Save Settings</button>
             </form>
         </div>
 
-        <!-- Preview -->
-        <div>
-            <div class="fcb-card">
-                <h2>📱 Live Preview</h2>
-                <div class="fcb-preview-phone">
-                    <div class="fcb-preview-screen">
-                        <div id="fcb-preview-buttons"></div>
-                    </div>
+        <!-- RIGHT COLUMN: Sticky Preview -->
+        <div class="fcb-preview-col-wrapper">
+            <div class="fcb-preview-sticky">
+                <div class="fcb-preview-header">
+                    <h3>Live Preview</h3>
+                    <p>This is a rough representation. Exact layout depends on your theme.</p>
                 </div>
-                <p style="font-size:11px;color:#888;margin-top:10px;text-align:center;">Updates as you change settings</p>
+                <div class="fcb-preview-box" id="fcb-preview-box">
+                    <!-- JS injects buttons here -->
+                </div>
             </div>
         </div>
     </div>

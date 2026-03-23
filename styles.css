@@ -82,20 +82,38 @@
 /* ── Admin Base ─────────────────────────────────────────────────────────────── */
 
 .fcb-admin-wrap {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 24px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
     margin-top: 20px;
-    align-items: start;
+    min-height: 100vh; /* Needed so the sticky element has room to scroll */
+}
+
+/* LEFT COLUMN */
+.fcb-settings-col {
+    flex: 1;
+    min-width: 0;
+    max-width: 800px; /* Constrain width of left column */
+}
+
+/* RIGHT COLUMN */
+.fcb-preview-col-wrapper {
+    width: 320px;
+    flex-shrink: 0;
+}
+
+.fcb-preview-sticky {
+    position: sticky;
+    top: 50px; /* Offset from WP admin bar */
 }
 
 .fcb-card {
     background: #fff;
     border: 1px solid #e2e4e7;
-    border-radius: 8px;
-    padding: 22px 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
 .fcb-card h2 {
@@ -111,7 +129,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .fcb-form-row > label {
@@ -124,47 +142,49 @@
 .fcb-form-row input[type="number"],
 .fcb-form-row select {
     width: 100%;
-    padding: 8px 10px;
+    max-width: 100%; /* Allows fields to fill column width gracefully */
+    padding: 10px 12px;
     border: 1px solid #dcdcde;
-    border-radius: 5px;
-    font-size: 13px;
+    border-radius: 6px;
+    font-size: 14px;
     background: #fafafa;
     color: #1e1e1e;
     box-sizing: border-box;
-    transition: border-color 0.15s;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .fcb-form-row input:not(.fcb-cp-hex):focus,
 .fcb-form-row select:focus {
     outline: none;
-    border-color: #2271b1;
+    border-color: #0BDADA;
     background: #fff;
-    box-shadow: 0 0 0 2px rgba(34,113,177,0.15);
+    box-shadow: 0 0 0 2px rgba(11,218,218,0.15);
 }
 
 .fcb-inline-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 20px;
 }
 
 .fcb-toggle-row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    padding: 10px 14px;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
     background: #f6f7f7;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .fcb-toggle-row input[type="checkbox"] {
-    width: 16px; height: 16px;
-    accent-color: #2271b1;
+    width: 18px; height: 18px;
+    accent-color: #0BDADA;
     cursor: pointer; margin: 0;
 }
 
-.fcb-toggle-row label { font-size: 13px; font-weight: 500; color: #1e1e1e; cursor: pointer; margin: 0; }
+.fcb-toggle-row label { font-size: 14px; font-weight: 500; color: #1e1e1e; cursor: pointer; margin: 0; }
+
 
 /* ── Custom Color Picker ────────────────────────────────────────────────────── */
 
@@ -199,8 +219,8 @@
 }
 
 .fcb-cp-wrap:focus-within {
-    border-color: #2271b1;
-    box-shadow: 0 0 0 2px rgba(34,113,177,0.15);
+    border-color: #0BDADA;
+    box-shadow: 0 0 0 2px rgba(11,218,218,0.15);
     background: #fff;
 }
 
@@ -271,13 +291,13 @@
 }
 
 .fcb-icon-opt:hover {
-    border-color: #2271b1;
+    border-color: #0BDADA;
     transform: scale(1.08);
 }
 
 .fcb-icon-sel {
-    border-color: #2271b1 !important;
-    background: #e8f0fb !important;
+    border-color: #0BDADA !important;
+    background: rgba(11,218,218,0.1) !important;
 }
 
 .fcb-icon-opt .dashicons {
@@ -289,60 +309,70 @@
 
 .fcb-icon-opt svg { display: block; color: #3c434a; }
 .fcb-icon-sel .dashicons,
-.fcb-icon-sel svg { color: #2271b1; }
+.fcb-icon-sel svg { color: #0BDADA; }
 
 /* ── Save Button ────────────────────────────────────────────────────────────── */
 
-.fcb-save-btn {
-    display: inline-block;
-    padding: 10px 24px;
-    background: #2271b1;
-    color: #fff !important;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
+.fcb-btn-save {
+    background: #0BDADA !important;
+    color: #102222 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 0 24px !important;
+    height: 40px;
+    font-size: 14px !important;
+    font-weight: 700 !important;
     cursor: pointer;
-    transition: background 0.2s;
-    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(11,218,218,0.3) !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
 }
 
-.fcb-save-btn:hover { background: #135e96; }
-
-/* ── Preview Phone ──────────────────────────────────────────────────────────── */
-
-.fcb-preview-phone {
-    background: #1a1a2e;
-    border-radius: 36px;
-    padding: 14px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 0 0 2px #333;
+.fcb-btn-save:hover { 
+    background: #09c4c4 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(11,218,218,0.4) !important;
 }
 
-.fcb-preview-screen {
-    background: #f0f4f8;
-    border-radius: 22px;
-    height: 400px;
+/* ── Preview Panel ──────────────────────────────────────────────────────────── */
+
+.fcb-preview-header {
+    margin-bottom: 16px;
+}
+
+.fcb-preview-header h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e1e1e;
+}
+
+.fcb-preview-header p {
+    margin: 0;
+    font-size: 13px;
+    color: #646970;
+    line-height: 1.4;
+}
+
+.fcb-preview-box {
+    background: #fff;
+    border-radius: 12px;
+    height: 480px;
     position: relative;
     overflow: hidden;
+    border: 1px solid #dcdcde;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
-.fcb-preview-screen::before {
-    content: 'Page Preview';
+.fcb-preview-box::before {
+    content: 'Website Canvas';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%,-50%);
-    font-size: 11px;
+    font-size: 12px;
     color: #b0bec5;
     font-family: sans-serif;
     letter-spacing: 0.05em;
-}
-
-#fcb-preview-buttons {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 10;
+    font-weight: 500;
 }
 
 /* ── Notices ─────────────────────────────────────────────────────────────────── */
