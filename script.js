@@ -87,8 +87,13 @@
         var orient   = getVal("fcb[orientation]") || "vertical";
         var ox = parseInt(getVal("fcb[offset_x]"), 10) || 16;
         var oy = parseInt(getVal("fcb[offset_y]"), 10) || 16;
-        var px = Math.round(ox * 0.85); // Increased from 0.45 
-        var py = Math.round(oy * 0.85); 
+        
+        var activeDeviceBtn = document.querySelector(".fcb-dt-btn.active");
+        var activeDevice = activeDeviceBtn ? activeDeviceBtn.dataset.device : "desktop";
+        var multiplier = activeDevice === "desktop" ? 0.6 : 0.85;
+
+        var px = Math.round(ox * multiplier);
+        var py = Math.round(oy * multiplier); 
 
         previewContainer.style.top    = "";
         previewContainer.style.bottom = "";
@@ -123,14 +128,14 @@
             var iconEl   = document.querySelector('.fcb-icon-picker .fcb-icon-val[name="fcb[buttons][' + i + '][icon]"]');
             var icon     = iconEl ? iconEl.value : "";
 
-            // Increased multipliers since the canvas is much larger than the phone mockup
-            var ph      = Math.round(size * 0.9);
-            var pIconSz = Math.round(iconSz * 0.9);
-            var pPadX   = Math.round(padX  * 0.9);
+            var ph      = Math.round(size * multiplier);
+            var pIconSz = Math.round(iconSz * multiplier);
+            var pPadX   = Math.round(padX  * multiplier);
+            var fz      = Math.max(8, Math.round(14 * multiplier));
 
             var btn = document.createElement("div");
             btn.className = "fcb-preview-btn";
-            btn.style.cssText = "background:" + bg + ";color:" + text + ";height:" + ph + "px;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:0 " + pPadX + "px;font-size:12px;font-weight:600;font-family:sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.2);";
+            btn.style.cssText = "background:" + bg + ";color:" + text + ";height:" + ph + "px;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:0 " + pPadX + "px;font-size:" + fz + "px;font-weight:600;font-family:sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.2);";
 
             switch (shape) {
                 case "circle": btn.style.borderRadius = "50%"; btn.style.width = ph + "px"; btn.style.padding = "0"; break;
@@ -164,6 +169,26 @@
     document.querySelectorAll("input, select").forEach(function (el) {
         el.addEventListener("input",  updatePreview);
         el.addEventListener("change", updatePreview);
+    });
+
+    // ── Device Preview Toggle ────────────────────────────────────────────────
+    document.querySelectorAll(".fcb-dt-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+            // Update active button styling
+            document.querySelectorAll(".fcb-dt-btn").forEach(function(b) { 
+                b.classList.remove("active"); 
+            });
+            this.classList.add("active");
+            
+            // Switch canvas class
+            var box = document.getElementById("fcb-preview-box");
+            if (box) {
+                box.className = "fcb-preview-box fcb-device-" + this.dataset.device;
+            }
+            
+            // Re-render buttons with new scale multiplier
+            updatePreview();
+        });
     });
 
     updatePreview();

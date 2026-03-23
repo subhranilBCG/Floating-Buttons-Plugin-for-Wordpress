@@ -207,11 +207,17 @@ $icons = [
         <div class="fcb-preview-col-wrapper">
             <div class="fcb-preview-sticky">
                 <div class="fcb-preview-header">
-                    <h3>Live Preview</h3>
-                    <p>This is a rough representation. Exact layout depends on your theme.</p>
+                    <div>
+                        <h3>Live Preview</h3>
+                        <p>Exact layout depends on your theme.</p>
+                    </div>
+                    <div class="fcb-device-toggle">
+                        <button type="button" class="fcb-dt-btn active" data-device="desktop" title="Desktop View"><span class="dashicons dashicons-desktop"></span></button>
+                        <button type="button" class="fcb-dt-btn" data-device="mobile" title="Mobile View"><span class="dashicons dashicons-smartphone"></span></button>
+                    </div>
                 </div>
-                <div class="fcb-preview-box" id="fcb-preview-box">
-                    <!-- JS injects buttons here -->
+                <div class="fcb-preview-box fcb-device-desktop" id="fcb-preview-box">
+                    <div id="fcb-preview-buttons"></div>
                 </div>
             </div>
         </div>

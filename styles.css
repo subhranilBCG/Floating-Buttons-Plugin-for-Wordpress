@@ -141,8 +141,6 @@
 .fcb-form-row input[type="text"]:not(.fcb-cp-hex),
 .fcb-form-row input[type="number"],
 .fcb-form-row select {
-    width: 100%;
-    max-width: 100%; /* Allows fields to fill column width gracefully */
     padding: 10px 12px;
     border: 1px solid #dcdcde;
     border-radius: 6px;
@@ -151,6 +149,18 @@
     color: #1e1e1e;
     box-sizing: border-box;
     transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fcb-form-row input[type="text"]:not(.fcb-cp-hex),
+.fcb-form-row input[type="number"] {
+    width: 100%;
+    max-width: 100%;
+}
+
+.fcb-form-row select {
+    width: max-content;
+    min-width: 180px;
+    max-width: 100%;
 }
 
 .fcb-form-row input:not(.fcb-cp-hex):focus,
@@ -336,6 +346,9 @@
 /* ── Preview Panel ──────────────────────────────────────────────────────────── */
 
 .fcb-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: 16px;
 }
 
@@ -353,26 +366,88 @@
     line-height: 1.4;
 }
 
+.fcb-device-toggle {
+    display: flex;
+    gap: 4px;
+    background: #f0f0f1;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.fcb-dt-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #646970;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fcb-dt-btn:hover {
+    color: #1e1e1e;
+}
+
+.fcb-dt-btn.active {
+    background: #fff;
+    color: #0BDADA;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
 .fcb-preview-box {
     background: #fff;
-    border-radius: 12px;
-    height: 480px;
     position: relative;
     overflow: hidden;
     border: 1px solid #dcdcde;
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+.fcb-preview-box.fcb-device-desktop {
+    width: 100%;
+    height: 260px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08), inset 0 0 0 4px #333;
+    border: none;
+}
+
+.fcb-preview-box.fcb-device-desktop::before {
+    content: 'Desktop Canvas';
+}
+
+.fcb-preview-box.fcb-device-mobile {
+    width: 260px;
+    height: 480px;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08), inset 0 0 0 4px #333;
+    border: none;
+}
+
+.fcb-preview-box.fcb-device-mobile::before {
+    content: 'Mobile Canvas';
 }
 
 .fcb-preview-box::before {
-    content: 'Website Canvas';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%,-50%);
-    font-size: 12px;
+    font-size: 13px;
     color: #b0bec5;
     font-family: sans-serif;
     letter-spacing: 0.05em;
     font-weight: 500;
+}
+
+#fcb-preview-buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 10;
 }
 
 /* ── Notices ─────────────────────────────────────────────────────────────────── */
